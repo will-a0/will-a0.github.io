@@ -33,12 +33,12 @@ function mousePressed() {
 }
 
 function keyPressed() {
-  //User input for the color of the car
+  //User input for the color and speed of the car
   if (key === "c" || key === "C") {
-    CarColorInput = prompt("Change the color of the car ", "");
+    CarColorInput = prompt("Change the color of the car to red, blue, or green (red is the default): ", "");
   }
   else if (key === "s" || key === "S") {
-    CarSpeedInput = prompt("Change the speed of the car ", "");
+    CarSpeedInput = prompt("Change the speed of the car to 3, 5, 8, or 12 (3 is the default): ", "");
   }
 
   if (key === "a" || key === "A") {
