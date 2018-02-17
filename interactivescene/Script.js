@@ -1,7 +1,6 @@
 // Translating Python Processing Assignment, "Scene_Assignment" into Javascript
 
-let x, y;
-let isMovingLeft, isMovingRight;
+let x, isMovingLeft, isMovingRight;
 let CarColorInput, CarSpeedInput;
 
 function setup() {
@@ -10,7 +9,7 @@ function setup() {
   isMovingLeft = false;
   isMovingRight = false;
   x = 25;
-  y = 600;
+  //y = 600;
 }
 
 function backgroundSetup() {
@@ -24,7 +23,7 @@ function draw() {
   noStroke();
   landscapePortion();
   cityPortion();
-  drawCar(x, y);
+  drawCar(x);
   moveCar();
 }
 
@@ -35,17 +34,24 @@ function mousePressed() {
 function keyPressed() {
   //User input for the color and speed of the car
   if (key === "c" || key === "C") {
-    CarColorInput = prompt("Change the color of the car to red, blue, or green (red is the default): ", "");
+    CarColorInput = prompt("Change the color of the car to blue, green or red (red is the default): ", "");
   }
   else if (key === "s" || key === "S") {
-    CarSpeedInput = prompt("Change the speed of the car to 3, 5, 8, or 12 (3 is the default): ", "");
+    CarSpeedInput = prompt("Change the speed of the car (Min: 0, Max: 12): ", "");
   }
 
   if (key === "a" || key === "A") {
     isMovingLeft = true;
+    if (isNaN(int(CarSpeedInput))) {
+      isMovingLeft = false;
+    }
   }
+
   else if (key === "d" || key === "D") {
     isMovingRight = true;
+    if (isNaN(int(CarSpeedInput))) {
+      isMovingRight = false;
+    }
   }
 }
 
@@ -60,38 +66,24 @@ function keyReleased() {
 
 function moveCar() {
   if (isMovingLeft) {
-    x -= 3;
-
-    if (CarSpeedInput === "5") {
-      x -= 5
-    }
-    else if (CarSpeedInput === "8") {
-      x -= 8
-    }
-    else if (CarSpeedInput === "12") {
-      x -= 12
+    if (CarSpeedInput >= 0 && CarSpeedInput <= 12) {
+      x -= float(CarSpeedInput);
     }
 
     if (x <= -90) {
       x = 1270;
     }
+    print(CarSpeedInput);
   }
   if (isMovingRight) {
-    x += 3;
-
-    if (CarSpeedInput === "5") {
-      x += 5
-    }
-    else if (CarSpeedInput === "8") {
-      x += 8
-    }
-    else if (CarSpeedInput === "12") {
-      x += 12
+    if (CarSpeedInput >= 0 && CarSpeedInput <= 12) {
+      x += float(CarSpeedInput);
     }
 
     if (x >= 1270) {
       x = -90;
     }
+    print(CarSpeedInput);
   }
 }
 
@@ -157,8 +149,8 @@ function cityPortion() {
 function drawCar(x, y) {
   //Car
   fill(128, 128, 128);
-  ellipse(x+70, y+30, 30);
-  ellipse(x+20, y+30, 30);
+  ellipse(x+70, 630, 30);
+  ellipse(x+20, 630, 30);
   fill(255, 0, 0);
 
   if (CarColorInput === "blue" || CarColorInput === "Blue") {
@@ -171,12 +163,12 @@ function drawCar(x, y) {
     fill(random(0, 255), random(0, 255), random(0, 255));
   }
 
-  rect(x, y, 90, 20);
-  rect(x, y-15, 70, 20);
+  rect(x, 600, 90, 20);
+  rect(x, 585, 70, 20);
 
   fill(184, 134, 11);
-  ellipse(x+80, y+8, 10);
+  ellipse(x+80, 608, 10);
 
   fill(153, 0, 0);
-  rect(x, y+3, 10, 10);
+  rect(x, 603, 10, 10);
 }
