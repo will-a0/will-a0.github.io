@@ -1,5 +1,15 @@
-// Translating Python Processing Assignment, "Scene_Assignment" into Javascript
+// Interactive Scene Assignment
+// Computer Science 30
+// William Ahiahonu
+// February 26th, 2018
 
+// Extra for experts attempt: - Use of random for background changes,
+// the flashing of the center tower and smaller building and car.
+// - The use of the isNaN() function to test for NaN so that when
+// nothing is entered for the speed input of the car, the movement
+// mechanisms are disabled so that the car does not disappear.
+
+// Global Variables set to be used later in the code
 let x, isMovingLeft, isMovingRight;
 let CarColorInput, CarSpeedInput;
 
@@ -9,7 +19,6 @@ function setup() {
   isMovingLeft = false;
   isMovingRight = false;
   x = 25;
-  //y = 600;
 }
 
 function backgroundSetup() {
