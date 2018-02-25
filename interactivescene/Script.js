@@ -1,6 +1,6 @@
 // Interactive Scene Assignment
+// By: William Ahiahonu
 // Computer Science 30
-// William Ahiahonu
 // February 26th, 2018
 
 // Extra for experts attempt: - Use of random for background changes,
@@ -11,10 +11,10 @@
 
 // Global Variables set to be used later in the code.
 let x, isMovingLeft, isMovingRight;
-let CarColorInput, CarSpeedInput;
+let carColorInput, carSpeedInput;
 
 // This function sets up the window in which the scene will run as
-// well as the background in the variables for the car's position/movement.
+// well as the background and the variables for the car's position/movement.
 function setup() {
   createCanvas(windowWidth, windowHeight);
   backgroundSetup();
@@ -52,24 +52,35 @@ function mousePressed() {
 // enables the car to move via keys 'a' and 'd' ('w' and 's' not used since it would
 // unrealistic for a car to fly).
 function keyPressed() {
-  //User input for the color and speed of the car
+  // When key 'c' is pressed, the user is prompted to enter a color for the car.
   if (key === "c" || key === "C") {
-    CarColorInput = prompt("Change the color of the car to blue, green or red (red is the default): ", "");
-  }
-  else if (key === "s" || key === "S") {
-    CarSpeedInput = prompt("Change the speed of the car (Min: 0, Max: 12): ", "");
+    carColorInput = prompt("Change the color of the car to blue, green or red (red is the default): ", "");
   }
 
+  // When key 's' is pressed, the user is prompted to enter a number value for the car's
+  // speed.
+  else if (key === "s" || key === "S") {
+    carSpeedInput = prompt("Change the speed of the car (Min: 0, Max: 12): ", "");
+  }
+
+  // if key 'a' is pressed, the car moves left.
   if (key === "a" || key === "A") {
     isMovingLeft = true;
-    if (isNaN(int(CarSpeedInput))) {
+
+    // If the speed input entered is a NaN value (Not a real Number), the car's
+    // ability to move left is disabled so that it does not disappear.
+    if (isNaN(int(carSpeedInput))) {
       isMovingLeft = false;
     }
   }
 
+  // if key 'd' is pressed, the car moves right.
   else if (key === "d" || key === "D") {
     isMovingRight = true;
-    if (isNaN(int(CarSpeedInput))) {
+
+    // If the speed input entered is a NaN value (Not a real Number), the car's
+    // ability to move right is disabled so that it does not disappear.
+    if (isNaN(int(carSpeedInput))) {
       isMovingRight = false;
     }
   }
@@ -79,9 +90,12 @@ function keyPressed() {
 // certain direction if a certain key is pressed (i.e. If 'a' is released,
 // the car will stop moving left)
 function keyReleased() {
+  // if key 'a' is released, the car no longer moves left.
   if (key === "a" || key === "A") {
     isMovingLeft = false;
   }
+
+  // if key 'd' is released, the car no longer moves right.
   else if (key === "d" || key === "D") {
     isMovingRight = false;
   }
@@ -91,20 +105,33 @@ function keyReleased() {
 // variables, 'isMovingLeft', 'isMovingRight' and 'x' in order to move the
 // via changing 'x' by a certain amount.
 function moveCar() {
+  // If the key 'a' is pressed and the user enters a number for the speed input,
+  // the car will move left by that certain number. Input cannot be smaller than
+  // 0 or greater than 12.
   if (isMovingLeft) {
-    if (CarSpeedInput >= 0 && CarSpeedInput <= 12) {
-      x -= float(CarSpeedInput);
+    if (carSpeedInput >= 0 && carSpeedInput <= 12) {
+      x -= float(carSpeedInput);
     }
 
+    // This is a parameter so that the car does not leave the scene -- when
+    // x equals -90 or lower, the car will appear on the other side of the
+    // screen (x = 1270).
     if (x <= -90) {
       x = 1270;
     }
   }
+
+  // If the key 'd' is pressed and the user enters a number for the speed input,
+  // the car will move right by that certain number. Input cannot be smaller than
+  // 0 or greater than 12.
   if (isMovingRight) {
-    if (CarSpeedInput >= 0 && CarSpeedInput <= 12) {
-      x += float(CarSpeedInput);
+    if (carSpeedInput >= 0 && carSpeedInput <= 12) {
+      x += float(carSpeedInput);
     }
 
+    // This is a parameter so that the car does not leave the scene -- when
+    // x equals 1270 or higher, the car will appear on the other side of the
+    // screen (x = -90).
     if (x >= 1270) {
       x = -90;
     }
@@ -113,14 +140,16 @@ function moveCar() {
 
 // This function draws the landscape of the scene: sun and clouds.
 function landscapePortion() {
-  //Sun
+  // Sun.
   fill(184, 134, 11);
   ellipse(0, 0, 200, 200);
 
-  //Clouds
+  // The colour and variable for each cloud position is set in this section.
   fill(255);
   cloudPosition = 30;
 
+  // This section creates five clouds with the position changing each time so
+  // that the clouds are spread out.
   for (let cloud = 0; cloud < 5; cloud++) {
     ellipse(cloudPosition, 80, 150, 100);
     ellipse(cloudPosition+70, 80, 90, 70);
@@ -128,10 +157,11 @@ function landscapePortion() {
     cloudPosition += 300
   }
 }
+
 // This functions draws the city portion of the scene: tower, building with
 // the arc, the black buildings that span accross the screen and the pavement.
 function cityPortion() {
-  //Tower
+  // Tower -- tallest building.
   fill(49, 79, 79);
   rect(480, 70, 40, 644);
   fill(random(0, 255), random(0, 255), random(0, 255))
@@ -139,11 +169,12 @@ function cityPortion() {
   fill(49, 79, 79)
   rect(490, 30, 20, 40)
 
-  //Background refresher
+  // Background refresher -- This reason why this section exists is so that
+  // the car does not leave marks as it moves.
   fill(49, 79, 79);
   rect(-2, 585, 2000, 100);
 
-  //The buildings either than the tower and arc
+  //The black buildings.
   fill(0);
   rect(25, 520, 70, 644);
   rect(107, 400, 70, 644);
@@ -161,43 +192,50 @@ function cityPortion() {
   rect(1091, 321, 70, 644);
   rect(1173, 550, 70, 644);
 
-  //Building with the arc
+  //Building with the arc.
   fill(random(0, 255), random(0, 255), random(0, 255))
   arc(630, 590, 200, 200, 0.5, PI+QUARTER_PI, OPEN);
   fill(49, 79, 79);
   rect(463, 600, 300, 644);
 
-  //Surface/Pavement
+  //Surface/Pavement.
   fill(184, 134, 11);
   rect(-2, 643, 2000, 100);
 }
 
 // This function incorporates the user input for colour in order to create
 // the body of the car. The x-position of the car is based on the global variable
-// 'x', which changes based on the function controlling ths movement of the car. 
+// 'x', which changes based on the function controlling ths movement of the car.
 function drawCar(x) {
-  //Car
+  // Wheels of the Car
   fill(128, 128, 128);
   ellipse(x+70, 630, 30);
   ellipse(x+20, 630, 30);
+
+  // The car's default color (before user input) is red.
   fill(255, 0, 0);
 
-  if (CarColorInput === "blue" || CarColorInput === "Blue") {
+  // The variable 'carColorInput' is used in order to change the color of the car
+  // based on input from the user.
+  if (carColorInput === "blue" || carColorInput === "Blue") {
     fill(65, 105, 225);
   }
-  else if (CarColorInput === "green" || CarColorInput === "Green") {
+  else if (carColorInput === "green" || carColorInput === "Green") {
     fill(0, 128, 0);
   }
-  else if (CarColorInput === "flashy" || CarColorInput === "Flashy") {
+  else if (carColorInput === "flashy" || carColorInput === "Flashy") {
     fill(random(0, 255), random(0, 255), random(0, 255));
   }
 
+  // Body of the car.
   rect(x, 600, 90, 20);
   rect(x, 585, 70, 20);
 
+  // Headlight of the car.
   fill(184, 134, 11);
   ellipse(x+80, 608, 10);
 
+  // Brakelight of the car.
   fill(153, 0, 0);
   rect(x, 603, 10, 10);
 }
