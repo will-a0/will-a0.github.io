@@ -200,7 +200,7 @@ function cityPortion() {
 
   //Surface/Pavement.
   fill(184, 134, 11);
-  rect(-2, 643, 2000, 100);
+  rect(-2, 643, 2000, 2000);
 }
 
 // This function incorporates the user input for colour in order to create
