@@ -4,8 +4,8 @@
 // February 26th, 2018
 
 // Extra for experts attempt:
-// - Use of random for background changes,
-// the flashing of the center tower and smaller building and car.
+// - Use of random for background changes, the flashing of the center
+// tower, the flashing of the arc on the smaller building, and the car.
 // - The use of the isNaN() function to test for NaN so that when
 // nothing is entered for the speed input of the car, the movement
 // mechanisms are disabled so that the car does not disappear.
@@ -33,8 +33,10 @@ function backgroundSetup() {
   background(randomBackground);
 }
 
-// After everthing is set, this function calls all the other functions in order
-// to draw the entire interactive scene.
+// After everthing is set, this function calls the other functions in order
+// to draw the entire interactive scene. 'backgroundSetup()' is called in the
+// setup function instead of the draw function so that is does not continue
+// looping.
 function draw() {
   noStroke();
   landscapePortion();
@@ -51,9 +53,9 @@ function mousePressed() {
 
 // This function activates the user input for car colour and speed and also
 // enables the car to move via keys 'a' and 'd' ('w' and 's' not used since it would
-// unrealistic for a car to fly).
+// be unrealistic for a car to 'fly').
 function keyPressed() {
-  // When key 'c' is pressed, the user is prompted to enter a color for the car.
+  // When key 'c' is pressed, the user is prompted to enter a colour for the car.
   if (key === "c" || key === "C") {
     carColorInput = prompt("Change the color of the car to blue, green or red (red is the default): ", "");
   }
@@ -88,8 +90,7 @@ function keyPressed() {
 }
 
 // This function serves as a check to make sure that the car is not moving a
-// certain direction if a certain key is pressed (i.e. If 'a' is released,
-// the car will stop moving left)
+// certain direction if a certain key is released.
 function keyReleased() {
   // if key 'a' is released, the car no longer moves left.
   if (key === "a" || key === "A") {
@@ -104,11 +105,11 @@ function keyReleased() {
 
 // This function incorporates the user input for speed as well as the the
 // variables, 'isMovingLeft', 'isMovingRight' and 'x' in order to move the
-// via changing 'x' by a certain amount.
+// car via changing 'x' by a certain amount.
 function moveCar() {
   // If the key 'a' is pressed and the user enters a number for the speed input,
   // the car will move left by that certain number. Input cannot be smaller than
-  // 0 or greater than 12.
+  // 0 or greater than 12. If nothing is entered when prompted, the car will not move.
   if (isMovingLeft) {
     if (carSpeedInput >= 0 && carSpeedInput <= 12) {
       x -= float(carSpeedInput);
@@ -124,7 +125,7 @@ function moveCar() {
 
   // If the key 'd' is pressed and the user enters a number for the speed input,
   // the car will move right by that certain number. Input cannot be smaller than
-  // 0 or greater than 12.
+  // 0 or greater than 12. If nothing is entered when prompted, the car will not move.
   if (isMovingRight) {
     if (carSpeedInput >= 0 && carSpeedInput <= 12) {
       x += float(carSpeedInput);
@@ -160,7 +161,8 @@ function landscapePortion() {
 }
 
 // This functions draws the city portion of the scene: tower, building with
-// the arc, the black buildings that span accross the screen and the pavement.
+// the arc, the black buildings that span accross the screen, the
+// background refresher, and the pavement.
 function cityPortion() {
   // Tower -- tallest building.
   fill(49, 79, 79);
@@ -171,7 +173,8 @@ function cityPortion() {
   rect(490, 30, 20, 40)
 
   // Background refresher -- This reason why this section exists is so that
-  // the car does not leave marks as it moves.
+  // the car does not leave marks as it moves In other words, this section covers
+  // up the marks of the car while not detracting from the design of the city scene.
   fill(49, 79, 79);
   rect(-2, 585, 2000, 100);
 
@@ -206,18 +209,19 @@ function cityPortion() {
 
 // This function incorporates the user input for colour in order to create
 // the body of the car. The x-position of the car is based on the global variable
-// 'x', which changes based on the function controlling ths movement of the car.
+// 'x', which changes based on the function controlling the movement of the car.
 function drawCar(x) {
-  // Wheels of the Car
+  // Wheels of the Car.
   fill(128, 128, 128);
   ellipse(x+70, 630, 30);
   ellipse(x+20, 630, 30);
 
-  // The car's default color (before user input) is red.
+  // The car's default colour (before user input) is red.
   fill(255, 0, 0);
 
-  // The variable 'carColorInput' is used in order to change the color of the car
-  // based on input from the user.
+  // The variable 'carColorInput' is used in order to change the colour of the car
+  // based on input from the user. If nothing or an invalid colour is entered when
+  // prompted, the car will default to red.
   if (carColorInput === "blue" || carColorInput === "Blue") {
     fill(65, 105, 225);
   }
