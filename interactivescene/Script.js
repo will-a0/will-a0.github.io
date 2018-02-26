@@ -3,7 +3,8 @@
 // Computer Science 30
 // February 26th, 2018
 
-// Extra for experts attempt: - Use of random for background changes,
+// Extra for experts attempt:
+// - Use of random for background changes,
 // the flashing of the center tower and smaller building and car.
 // - The use of the isNaN() function to test for NaN so that when
 // nothing is entered for the speed input of the car, the movement
@@ -200,7 +201,7 @@ function cityPortion() {
 
   //Surface/Pavement.
   fill(184, 134, 11);
-  rect(-2, 643, 2000, 2000);
+  rect(-2, 643, windowWidth, windowHeight);
 }
 
 // This function incorporates the user input for colour in order to create
