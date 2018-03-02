@@ -117,9 +117,9 @@ function moveCar() {
 
     // This is a parameter so that the car does not leave the scene -- when
     // x equals -90 or lower, the car will appear on the other side of the
-    // screen (x = 1270).
+    // screen (x = windowWidth).
     if (x <= -90) {
-      x = 1270;
+      x = windowWidth;
     }
   }
 
@@ -132,7 +132,7 @@ function moveCar() {
     }
 
     // This is a parameter so that the car does not leave the scene -- when
-    // x equals 1270 or higher, the car will appear on the other side of the
+    // x equals windowWidth or higher, the car will appear on the other side of the
     // screen (x = -90).
     if (x >= windowWidth) {
       x = -90;
