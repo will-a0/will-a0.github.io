@@ -9,10 +9,18 @@
 // - The use of the isNaN() function to test for NaN so that when
 // nothing is entered for the speed input of the car, the movement
 // mechanisms are disabled so that the car does not disappear.
+// *New* - Added music to the scene.
 
 // Global Variables set to be used later in the code.
 let x, isMovingLeft, isMovingRight;
 let carColorInput, carSpeedInput;
+let music, music2;
+
+// Loads the music for the scene.
+function preload() {
+  music = loadSound("WestGrandBoulevard.mp3");
+  music2 = loadSound("BangBangBoogaloo.mp3");
+}
 
 // This function sets up the window in which the scene will run as
 // well as the background and the variables for the car's position/movement.
@@ -22,6 +30,17 @@ function setup() {
   isMovingLeft = false;
   isMovingRight = false;
   x = 25;
+  playMusic();
+}
+
+// This function plays the music for the scene.
+function playMusic() {
+  music.setVolume(0.3);
+  music.play();
+  // if (!music.isPlaying()) {
+  //   music2.setVolume(0.5);
+  //   music2.play();
+  // }
 }
 
 // This function sets the background of the scene to change randomly everytime
@@ -43,6 +62,7 @@ function draw() {
   cityPortion();
   drawCar(x);
   moveCar();
+  print(!music.isPlaying());
 }
 
 // This function allows for the background of the scene to be changed with just
