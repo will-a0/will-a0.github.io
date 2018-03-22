@@ -153,7 +153,7 @@ function keyPressed() {
 
       // If the speed input entered is a NaN value (Not a real Number), the car's (buildings')
       // ability to move left is disabled so that they do not not disappear.
-      if (isNaN(int(carSpeedInput))) {
+      if (isNaN(int(carSpeedInput)) || carSpeedInput > 8) {
         isMovingLeft = false;
       }
     }
@@ -165,7 +165,7 @@ function keyPressed() {
 
       // If the speed input entered is a NaN value (Not a real Number), the car's (buildings)
       // ability to move right is disabled so that they do not not disappear.
-      if (isNaN(int(carSpeedInput))) {
+      if (isNaN(int(carSpeedInput)) || carSpeedInput > 8) {
         isMovingRight = false;
       }
     }
