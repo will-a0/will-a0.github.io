@@ -15,8 +15,8 @@
 // Global Variables set to be used later in the code.
 let x, isMovingLeft, isMovingRight;
 let carColorInput, carSpeedInput;
-let music = ["Music/WestGrandBoulevard.mp3", "Music/LeadFoot.mp3",
-"Music/JellyRoll.mp3", "Music/ErrolFlynns.mp3"];
+let music = ["music/WestGrandBoulevard.mp3", "music/LeadFoot.mp3",
+"music/JellyRoll.mp3", "music/ErrolFlynns.mp3"];
 let screenState;
 let clouds = ["cloud 1", "cloud 2", "cloud 3", "cloud 4", "cloud 5", "cloud 6",
 "cloud 7", "cloud 8"], cloudXPosition;
@@ -32,10 +32,10 @@ function preload() {
   backgroundMusic = loadSound(music[Math.floor(Math.random() * music.length)]);
 
   // All other assets are loaded and assigned to variables.
-  proceedSign = loadImage("Images/ProceedSign.png");
-  title = loadImage("Images/title.png");
-  frontPageArt = loadImage("Images/frontpageart.png");
-  instructions = loadImage("Images/instructions.png");
+  proceedSign = loadImage("images/ProceedSign.png");
+  title = loadImage("images/title.png");
+  frontPageArt = loadImage("images/frontpageart.png");
+  instructions = loadImage("images/instructions.png");
 }
 
 // This function sets up the window in which the scene will run, calls the function
